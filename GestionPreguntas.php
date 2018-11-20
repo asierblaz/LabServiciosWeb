@@ -192,7 +192,6 @@ function mostrarImagen(){
 	}
 	xmlhttp.open("GET",'verpreguntasbymail.php?mail=<?php echo $email?>',true);
 	xmlhttp.send();
-//VerPreguntas();
 	
 }
 
