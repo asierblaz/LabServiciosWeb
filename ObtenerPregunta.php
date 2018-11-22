@@ -64,6 +64,11 @@ echo $imprimir['imagen'];
 				echo"
 				<span><a href='GestionPreguntas.php?mail=$email'>Gestionar Preguntas</a></spam>";
 				?>
+			<?php
+				
+				echo"
+				<span><a href='ObtenerPregunta.php?mail=$email'>ObtenerPregunta</a></spam>";
+				?>
 <?php
 				
 				echo"
@@ -112,7 +117,7 @@ echo $imprimir['imagen'];
 
 beforeSend:function(){
 			
-			$('#verPreguntas').html('<div><img src="img/loading.gif" width="30"/></div>')},
+			$('#verPreguntas').html('<div><img src="img/loading.gif" width="60"/></div>')},
 	success:function(datos){
 
 

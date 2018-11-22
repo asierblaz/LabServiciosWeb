@@ -15,7 +15,7 @@ $server->wsdl->addComplexType(  'PreguntaObtenida',
                                 'struct', 
                                 'all', 
                                 '',
-                                array('email'              => array('name' => 'email','type' => 'xsd:string'),
+                                array('email'              => array('name' => 'email','type' => 'xsd:string'),'imagen'              => array('name' => 'imagen','type' => 'xsd:string'),
                                       'enunciado'              => array('name' => 'enunciado','type' => 'xsd:string'),
                                       'respcorrecta'     => array('name' => 'respcorrecta','type' => 'xsd:string'))
 );
@@ -36,7 +36,7 @@ function ObtenerPregunta ($clave){
 	include "ParametrosBD.php";
 
 	$conexion=mysqli_connect($servidor,$usuario,$password,$basededatos);
-$consulta= "SELECT email,enunciado,respcorrecta FROM preguntas WHERE clave='$clave'";
+$consulta= "SELECT email,imagen,enunciado,respcorrecta FROM preguntas WHERE clave='$clave'";
 $resultado=mysqli_query($conexion,$consulta);
 
 $fila= mysqli_num_rows($resultado);
@@ -44,6 +44,7 @@ $fila= mysqli_num_rows($resultado);
 if($fila==0){
 return array(
                 'email'=>"",
+                'imagen'=>"",
                 'enunciado'=>"",
                 'respcorrecta'=>""
             );
@@ -52,6 +53,7 @@ return array(
 	$imprimir= mysqli_fetch_array($resultado);
 	return array(
                 'email'=>$imprimir['email'],
+                'imagen'=>$imprimir['imagen'],
                 'enunciado'=>$imprimir['enunciado'],
                 'respcorrecta'=>$imprimir['respcorrecta']
             );

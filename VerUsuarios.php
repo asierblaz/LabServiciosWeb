@@ -67,6 +67,11 @@ echo $imprimir['imagen'];
 				echo"
 				<span><a href='GestionPreguntas.php?mail=$email'>Gestionar Preguntas</a></spam>";
 				?>
+			<?php
+				
+				echo"
+				<span><a href='ObtenerPregunta.php?mail=$email'>ObtenerPregunta</a></spam>";
+				?>
 <?php
 				
 				echo"
