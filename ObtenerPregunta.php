@@ -83,10 +83,9 @@ echo $imprimir['imagen'];
     <h3> Obtener Preguntas</h3>
 	<div>
 <fieldset>
-		Inserta el numero de pregunta que deseas ver.
+		Inserta el numero de pregunta que deseas ver
 
 		<input  id="clave">
-		<input type="button" id="Ver" value="Ver Pregunta" onclick="ObtenerPregunta();">
 	</fieldset>
 
 	</div>
