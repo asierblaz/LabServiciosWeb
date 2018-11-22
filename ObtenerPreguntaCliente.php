@@ -27,9 +27,7 @@ $sql= "SELECT imagen FROM preguntas WHERE clave='$clave'";
 $resultado= mysqli_query($conexion,$sql);
 
 while($imprimir=mysqli_fetch_array($resultado)){
-echo $imprimir['imagen'];
-}
-?>
+
 
  ?>
 
@@ -46,11 +44,12 @@ echo $imprimir['imagen'];
 	<td>&nbsp;&nbsp;<?php echo $result['email'] ?>&nbsp;&nbsp;</td>
 	<td>&nbsp;&nbsp;<?php echo $result['enunciado'] ?>&nbsp;&nbsp;</td>
 	<td>&nbsp;&nbsp;<?php echo $result['respcorrecta']?>&nbsp;&nbsp;</td>
-	<td>&nbsp;&nbsp;<?php echo "imagen"?>&nbsp;&nbsp;</td>
+	<td>&nbsp;&nbsp;<?php echo $imprimir['imagen']?>&nbsp;&nbsp;</td>
 	
 </tr>
 
-
+<?php }
+?>
 
 </table>
 
