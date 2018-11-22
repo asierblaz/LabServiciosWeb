@@ -45,14 +45,12 @@
 	<fieldset>
 
 <form id="registro" name="registro" method="POST" enctype="multipart/form-data" action="registrarse.php" style="background-color: white; text-align: left;">
-	Email*:<input type="text" name="email" id="email" class="entrada" placeholder="email123@ikasle.ehu.eus" required pattern="[a-z]{3,200}[0-9]{3}@ikasle.ehu+\.eus$"><br>
+	Email*:<input type="text" name="email" id="email" class="entrada" placeholder="email123@ikasle.ehu.eus" required pattern="[a-z]{3,200}[0-9]{3}@ikasle.ehu+\.eus$"><label id="emailvip"></label><br> 
 	Nombre y Apellidos*: <input type="text" name="nombre" id="nombre" class="entrada"required><br>
-	Contraseña*: <input type="password" name="password" minlength="8"id="password" class="entrada"required><br>
+	Contraseña*: <input type="password" name="password" minlength="8"id="password" class="entrada"required><label id="contraseñatop"></label><br>
 	Repita su contraseña: <input type="password" name="repassword" minlength="8" id="repassword" class="entrada"required><br>
 	
 	<br>
-	
-	
 	Foto de perfil: <input id="imagen" type="file" name="imagen" onchange="mostrarImagen()"><br> <br>
 	
 <center>	<img id="argazki" name="imagen"width="100" height="100"> </center> <br>
@@ -86,9 +84,10 @@ include "ParametrosBD.php";
 	move_uploaded_file($archivo, $dir);
 
 
+?>
 
 
-
+<?php  
 
 	//sentencia sql
 	
@@ -123,10 +122,101 @@ include "ParametrosBD.php";
 	</footer>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
 <script>
 
+	var valida = false;
+
+function ComprobarPassword(){
+	var password = document.getElementById("password").value;
+		$.ajax({
+		url: 'ClientePassword.php?password='+password+'',
+
+	success:function(datos){
+	
+	if	(datos==1){
+
+$('#contraseñatop').fadeIn().html(' <p style="color:green;">La contraseña es VALIDA</p> ');	
+	valida=true;
+}
+
+else if (datos==2){
+	valida=false;
+$('#contraseñatop').fadeIn().html(' <p style="color:orange;">SIN SERVICIO</p> ');	
+
+}
+ else {
+
+$('#contraseñatop').fadeIn().html(' <p style="color:red;">La contraseña es INVALIDA</p> ');	
+	valida= false;
+	}
+
+
+
+
+		}
+			});
+		}
+
+ $("#password").blur(function(){ //con blur detecta cuando el usuario ha dejado de escribir
+ ComprobarPassword();
+ });
+ $("#password").keyup(function(){ //con keyup detecta cuando el usuario toca el teclado en ese campo
+ ComprobarPassword();
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------email-----------------------------------------
+	var vip= false;
+
+		function EmailVip(){
+		var email = document.getElementById("email").value;
+		$.ajax({
+		url: 'EmailVip.php?mail='+email+'',
+
+	success:function(datos){
+	if	(datos==1){
+
+$('#emailvip').fadeIn().html(' <p style="color:green;">El email es vip</p> ');	
+	vip=true;
+}
+ else {
+$('#emailvip').fadeIn().html(' <p style="color:red;">El email no es vip</p> ');	
+	vip= false
+	}
+
+
+		}
+			});
+		}
+
+
+
+
+$("#email").blur(function(){ //con blur detecta cuando el usuario ha dejado de escribir
+EmailVip();
+});
+$("#email").keyup(function(){ //con keyup detecta cuando el usuario toca el teclado en ese campo
+EmailVip();
+});
+
+
+
+
+
+
 //mostrar foto
+
+
 
 function mostrarImagen(){
 
@@ -147,6 +237,17 @@ function mostrarImagen(){
 	$("#registro").submit(function(){
 
 
+if(valida==false){
+		alert("Tienes que tener una contraseña mas segura");
+		return false;
+	}
+
+
+if(vip==false){
+		alert("Tienes que tener un email vip para poderte registrar");
+		return false;
+	}
+
 var expresionnombre = new RegExp(/\w+\s+\w+/)
 
 	if(expresionnombre.test($("#nombre").val())==false){
@@ -159,9 +260,14 @@ var expresionnombre = new RegExp(/\w+\s+\w+/)
 				alert("Las contraseñas tienen que ser iguales.");
 				return false;
 			}
+
+	if(valida==false){
+		alert("La contraseña no es valida");
+		return false;
+	}
+
+
 })
-
-
 
 
 	</script>

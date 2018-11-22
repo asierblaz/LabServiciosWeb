@@ -1,13 +1,13 @@
 <?php
 
-$email=$_GET['mail'];
+$password=$_GET['password'];
 
 
-if($email == "ablazquez012@ikasle.ehu.eus"){
-echo "SI";}
+if($password == "asierasier"){
+echo "VALIDA";}
 else{
 
-	echo "NO";
+	echo "INVALIDA";
 }
 
 ?>
